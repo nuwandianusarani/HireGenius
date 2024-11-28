@@ -6,6 +6,39 @@ import { UserSummaryTable } from "./components/UserSummaryTable";
 
 const MAIN_AUTHOR_USER_NAME = "yasas4d";
 
+const Header = () => (
+  <header
+    style={{
+      backgroundColor: "#004080",
+      padding: "20px",
+      color: "white",
+      textAlign: "center",
+      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    }}
+  >
+    <h1 style={{ margin: "0", fontSize: "2.5rem" }}>HireGenius</h1>
+    <p style={{ margin: "10px 0 0", fontSize: "1.2rem" }}>
+      Empowering your hiring process with GitHub insights
+    </p>
+  </header>
+);
+
+const Footer = () => (
+  <footer
+    style={{
+      backgroundColor: "#004080",
+      color: "white",
+      padding: "10px 20px",
+      marginTop: "40px",
+      textAlign: "center",
+      fontSize: "0.9rem",
+    }}
+  >
+    <p>&copy; {new Date().getFullYear()} HireGenius. All Rights Reserved.</p>
+    <p>Built with ❤️ by HireGenius Team</p>
+  </footer>
+);
+
 const ChartArea = ({ totalContributions, contributionDays, userName }) => (
   <>
     <h1>
@@ -44,31 +77,6 @@ const SearchArea = ({ userName, onSearch }) => {
   );
 };
 
-const AuthorArea = () => (
-  <div style={{ marginTop: "120px" }}>
-    <p>
-      Source Code Here:{" "}
-      <a
-        rel="noopener noreferrer"
-        target="_blank"
-        href="https://github.com/your-repo-url" // Replace with actual repo URL
-      >
-        GitHub Repo
-      </a>
-    </p>
-    <p>
-      Author:{" "}
-      <a
-        rel="noopener noreferrer"
-        target="_blank"
-        href={`https://github.com/${MAIN_AUTHOR_USER_NAME}`}
-      >
-        {MAIN_AUTHOR_USER_NAME}
-      </a>
-    </p>
-  </div>
-);
-
 const App = () => {
   const [userName, setUserName] = useState(MAIN_AUTHOR_USER_NAME);
   const [totalContributions, setTotalContributions] = useState(0);
@@ -101,17 +109,19 @@ const App = () => {
         fontFamily: "Roboto, sans-serif",
       }}
     >
+      <Header />
+      <SearchArea userName={userName} onSearch={setUserName} />
       <ChartArea
         contributionDays={contributionDays}
         totalContributions={totalContributions}
         userName={userName}
       />
-      <SearchArea userName={userName} onSearch={setUserName} />
-      <AuthorArea />
+
       <div style={{ textAlign: "center", marginBottom: 20 }}>
         <h1>GitHub User Contribution Summary</h1>
         {metrics ? <UserSummaryTable userData={metrics} /> : <p>Loading...</p>}
       </div>
+      <Footer />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-const TOKEN = "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";
 const query = `
 query($userName:String!) {
   user(login: $userName){
