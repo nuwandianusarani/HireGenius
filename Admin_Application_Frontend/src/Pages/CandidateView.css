@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .candidates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .candidate-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .candidate-card h2 {
+    margin-top: 0;
+    color: #0073e6;
+  }
+  
+  .candidate-card p {
+    margin: 5px 0;
+  }
+  
+  .candidate-card a {
+    color: #0073e6;
+    text-decoration: none;
+  }
+  
+  .candidate-card a:hover {
+    text-decoration: underline;
+  }
+  
