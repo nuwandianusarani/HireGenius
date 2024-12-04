@@ -9,6 +9,7 @@ query($userName:String!) {
             contributionCount
             date
           }
+            
         }
       }
     }

@@ -1,8 +1,11 @@
+import { act } from "react";
+
 export function calculateContributionMetrics(weeks, userName) {
   let totalCommits = 0;
   let maxStreak = 0;
   let currentStreak = 0;
   let activeDays = 0;
+  let daysWithoutCommits = 0;
   let weeklyCommitCounts = [];
   let streak = 0;
 
@@ -37,6 +40,8 @@ export function calculateContributionMetrics(weeks, userName) {
     weeklyCommitCounts.filter((count) => count > 0).length /
     weeklyCommitCounts.length;
 
+  daysWithoutCommits = totalDays - activeDays;
+
   return {
     totalCommits,
     maxStreak,
@@ -45,5 +50,7 @@ export function calculateContributionMetrics(weeks, userName) {
     commitFrequency,
     commitConsistency,
     userName,
+    activeDays,
+    daysWithoutCommits,
   };
 }

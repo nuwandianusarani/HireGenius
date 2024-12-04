@@ -20,20 +20,29 @@ model = joblib.load(model_file)
 scaler_file = 'standard_scaler.pkl'  # Replace with your actual scaler file path
 scaler = joblib.load(scaler_file)
 
-# Define a function to assign marks based on the prediction
-def assign_marks(prediction):
+def assign_marks(prediction, allocatedMarks):
     """
     Assign marks based on the prediction value.
     Customize this logic based on your use case.
     """
-    print(prediction)
+    cluster_priority = [3, 2, 1, 4, 0]
 
-    if prediction > 0.8:
-        return 90
-    elif prediction > 0.5:
-        return 70
-    else:
-        return 50
+    if prediction not in cluster_priority:
+        raise ValueError(f"Invalid prediction: {prediction}. Must be one of {cluster_priority}.")
+
+    # # Determine the priority rank (0-based index)
+    rank = cluster_priority.index(prediction)
+
+    # # Calculate the marks
+    marks_ratio = (len(cluster_priority) - rank) / len(cluster_priority)
+
+    allocatedMarks = float(allocatedMarks)
+
+    # print(f"Prediction: {prediction}")
+    print(f"Allocated Marks: {allocatedMarks}")
+    # print(f"Assigned Marks: {assigned_marks}")
+
+    return allocatedMarks * marks_ratio
 
 # Define the POST endpoint
 @app.route('/predict', methods=['POST'])
@@ -43,6 +52,10 @@ def predict_endpoint():
         data = request.json
         if not data:
             return jsonify({"error": "No input data provided"}), 400
+
+        #Extract MArks from the request
+        allocatedMarks = data.get('marks')
+
         
         # Extract features from the request
         features = data.get('features')  # Expecting a list of features
@@ -60,12 +73,13 @@ def predict_endpoint():
 
         # Make prediction
         prediction = model.predict(features_normalized)  # Use the model's predict method
+        print("Prediction:", prediction)
 
         # Convert the prediction to a native Python type (float)
         prediction = prediction[0] if isinstance(prediction, np.ndarray) else prediction
 
         # Assign marks based on the prediction (assuming it's a scalar output)
-        marks = assign_marks(prediction)
+        marks = assign_marks(prediction, allocatedMarks)
 
         # Prepare response
         response = {

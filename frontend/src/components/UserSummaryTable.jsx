@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 export const UserSummaryTable = ({ userData }) => {
   const [apiResponse, setApiResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const ref = useRef(null);
 
   const handlePredict = async () => {
     setLoading(true);
@@ -12,13 +13,19 @@ export const UserSummaryTable = ({ userData }) => {
 
     const apiUrl = "http://127.0.0.1:5000/predict";
     const requestBody = {
+      marks: ref.current.value,
       features: [
         userData.totalCommits,
         userData.maxStreak,
         userData.commitFrequency,
         userData.commitConsistency,
+        userData.averageWeeklyCommits,
+        userData.activeDays,
+        userData.daysWithoutCommits,
       ],
     };
+
+    console.log("Request body", requestBody);
 
     try {
       const response = await fetch(apiUrl, {
@@ -41,12 +48,32 @@ export const UserSummaryTable = ({ userData }) => {
   };
 
   return (
-    <div style={{ textAlign: "center", margin: "20px auto", width: "80%" }}>
+    <div
+      style={{
+        maxWidth: "90%",
+        margin: "20px auto",
+        padding: "20px",
+        borderRadius: "8px",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        backgroundColor: "#ffffff",
+        overflowX: "auto", // Enables horizontal scrolling for smaller screens
+      }}
+    >
+      <h2
+        style={{
+          textAlign: "center",
+          fontSize: "1.5rem",
+          marginBottom: "20px",
+          color: "#004080",
+        }}
+      >
+        User Summary and Prediction
+      </h2>
       <table
         style={{
           width: "100%",
           borderCollapse: "collapse",
-          marginTop: "20px",
+          marginBottom: "20px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
@@ -102,6 +129,13 @@ export const UserSummaryTable = ({ userData }) => {
         </tbody>
       </table>
 
+      <div style={{ marginTop: "120px" }}>
+        Enter the proportion for GitHub user analyse
+        <form style={{ marginTop: "12px" }}>
+          <input ref={ref} type="text" placeholder="marks" />
+        </form>
+      </div>
+
       <button
         style={{
           marginTop: "20px",
@@ -134,9 +168,9 @@ export const UserSummaryTable = ({ userData }) => {
           <p style={{ fontSize: "1.2rem", fontWeight: "bold" }}>
             Marks: {apiResponse.marks}
           </p>
-          <p style={{ fontSize: "1rem" }}>
+          {/* <p style={{ fontSize: "1rem" }}>
             Prediction: {apiResponse.prediction}
-          </p>
+          </p> */}
         </div>
       )}
 

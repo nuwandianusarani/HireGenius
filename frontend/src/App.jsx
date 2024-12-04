@@ -4,8 +4,6 @@ import { retrieveContributionData } from "./services/githubService.js";
 import { calculateContributionMetrics } from "./utils/calculateContributionMetrics.js";
 import { UserSummaryTable } from "./components/UserSummaryTable";
 
-const MAIN_AUTHOR_USER_NAME = "yasas4d";
-
 const Header = () => (
   <header
     style={{
@@ -51,7 +49,6 @@ const ChartArea = ({ totalContributions, contributionDays, userName }) => (
         {userName}
       </a>
     </h1>
-    <h2>Total Contributions: {totalContributions}</h2>
     <h2>Accumulation of Contributions Over One Year</h2>
     <ContributionChart contributionDays={contributionDays} />
   </>
@@ -61,12 +58,12 @@ const SearchArea = ({ userName, onSearch }) => {
   const ref = useRef(null);
   const handleClick = (e) => {
     e.preventDefault();
-    const newUserName = ref.current?.value || MAIN_AUTHOR_USER_NAME;
+    const newUserName = ref.current?.value;
     onSearch(newUserName);
   };
   return (
     <div style={{ marginTop: "120px" }}>
-      Type in Another GitHub Account ID Below to See Contributions
+      Enter Github UserName to see the contributions
       <form style={{ marginTop: "12px" }}>
         <input ref={ref} type="text" placeholder={userName} />
         <button type="submit" onClick={handleClick}>
@@ -78,7 +75,7 @@ const SearchArea = ({ userName, onSearch }) => {
 };
 
 const App = () => {
-  const [userName, setUserName] = useState(MAIN_AUTHOR_USER_NAME);
+  const [userName, setUserName] = useState("");
   const [totalContributions, setTotalContributions] = useState(0);
   const [metrics, setMetrics] = useState(null);
   const [contributionDays, setContributionDays] = useState([]);
