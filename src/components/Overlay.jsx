@@ -30,7 +30,7 @@ export const Overlay = () => {
             <div className="spinner">
             </div>
           </h1>
-          <p className="intro__scroll">Scroll to begin the journey</p>
+          <p className="intro__scroll">Keep Scrolling to begin the journey</p>
           <button
             className="explore"
             onClick={() => {
