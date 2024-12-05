@@ -23,7 +23,7 @@ function Results() {
         }}
         className='p-2'
     >
-        HireFlow
+        Hire Genius
     </div>
     <div className="container mt-2">
       <h3 className="text-center mb-2">Your Interview Answers Overview</h3>
