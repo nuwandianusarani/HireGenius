@@ -276,7 +276,7 @@ const EducationDetails = () => {
             textShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
         }}
     >
-        HireFlow
+        Hire Genius
     </div>
 
       <div className="container position-relative" style={{ zIndex: 1 }}>
