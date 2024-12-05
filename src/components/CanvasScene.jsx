@@ -43,7 +43,7 @@ const CanvasScene = () => {
           textShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
         }}
       >
-        HireFlow
+        Hire Genius
       </div>
 
       <Canvas>
