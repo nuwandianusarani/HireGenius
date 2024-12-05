@@ -26,7 +26,7 @@ export const Overlay = () => {
       {progress === 100 && (
         <div className={`intro ${play ? "intro--disappear" : ""}`}>
           <h1 className="logo">
-            HireFlow
+            Hire Genius
             <div className="spinner">
             </div>
           </h1>
