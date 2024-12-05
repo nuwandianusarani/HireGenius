@@ -40,7 +40,7 @@ const Stage2 = () => {
           textShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
         }}
       >
-        HireFlow
+        Hire Genius
       </div>
 
       <div className="level-map bg-image d-flex flex-column justify-content-center align-items-center">
