@@ -15,5 +15,7 @@ Automating initial screenings with a chatbot reduces human error and standardize
 
 
  ![systemdiagram](https://github.com/user-attachments/assets/1941e715-fbae-47e3-be01-863ef526cefd)
+Research Proble and Novelty
+![image](https://github.com/user-attachments/assets/97f6329b-b2b9-4312-bff4-45eecdd7519e)
 
 
