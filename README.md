@@ -11,7 +11,7 @@ Need for Personalized Screening & Chatbot Automation
 Standardized questions may not capture the full scope of a candidate’s fit.
 Personalized questions tailored to specific job
 Automating initial screenings with a chatbot reduces human error and standardizes and  evaluate candidates’ job fit, domain knowledge, and cultural alignment.
-![image](https://github.com/user-attachments/assets/e82b7b67-acc7-42ab-bf79-759f1b668844)
+
 
 
  ![systemdiagram](https://github.com/user-attachments/assets/1941e715-fbae-47e3-be01-863ef526cefd)
