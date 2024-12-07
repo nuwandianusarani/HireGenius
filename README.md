@@ -12,10 +12,19 @@ Standardized questions may not capture the full scope of a candidate’s fit.
 Personalized questions tailored to specific job
 Automating initial screenings with a chatbot reduces human error and standardizes and  evaluate candidates’ job fit, domain knowledge, and cultural alignment.
 
-
+System Diagram
 
  ![systemdiagram](https://github.com/user-attachments/assets/1941e715-fbae-47e3-be01-863ef526cefd)
+ 
 Research Proble and Novelty
+
 ![image](https://github.com/user-attachments/assets/97f6329b-b2b9-4312-bff4-45eecdd7519e)
+
+![image](https://github.com/user-attachments/assets/162525d7-e695-4830-a50f-f1ad850e8d64) Main Objective
+
+Develop an automated system for CV Shortlisting, Initial Screening, and Candidate Selection for Interview Advancement.
+
+
+
 
 
