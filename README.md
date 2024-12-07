@@ -1,5 +1,5 @@
 # Hewamadduma N.A
-Module to calculate Github commit Frequancy and consistemc and assign Marks 
+Module to calculate GitHub commit Frequency and consistency and assign Marks 
 
 ## Component Diagram
 
