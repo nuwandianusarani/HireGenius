@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import image1 from '../assets/images/recruitment-agency-logo-vector.jpg';
+import image1 from '../assets/images/logopurple.png';
 import { useParams, useNavigate } from 'react-router-dom';
+import Navbar from "../components/Navbar";
+
+const generateCandidateId = () => {
+  return Math.random().toString(36).substring(2, 17);
+};
 
 const JobApplicationForm = () => {
     const { jobID } = useParams(); 
@@ -16,6 +21,8 @@ const JobApplicationForm = () => {
       lastName: "",
       email: "",
       confirmEmail: "",
+      contactNumber: "", // Added Contact Number
+      noOfYearsExperience: "", // Added No of Years of Experience
       experience: [],
       education: [],
       linkedIn: "",
@@ -35,9 +42,7 @@ const JobApplicationForm = () => {
       candidateId: generateCandidateId(), // Add candidateId field
     });
     // Function to generate a random string of 15 characters
-const generateCandidateId = () => {
-  return Math.random().toString(36).substring(2, 17);
-};
+
  const navigate = useNavigate();
 
 
@@ -117,6 +122,16 @@ const generateCandidateId = () => {
     }
   };
 
+  // const nextPage = () => {
+  //   if (currentPage === 1) {
+  //     if (!formData.firstName || !formData.lastName || !formData.email || !formData.confirmEmail || !formData.linkedIn || !formData.github || !resume) {
+  //       alert("Please fill all required fields before proceeding.");
+  //       return;
+  //     }
+  //   }
+  //   setCurrentPage(currentPage + 1);
+  // };
+
   // Previous page
   const previousPage = () => {
     if (currentPage > 1) {
@@ -145,7 +160,8 @@ const generateCandidateId = () => {
 
     // Show alert and navigate before sending the request
   alert('Form has been submitted successfully!');
-  navigate(`/confirmation/${formData.candidateId}`);
+  //navigate(`/confirmation/${formData.candidateId}`);
+  navigate(`/confirmation/${formData.candidateId}/${formData.jobID}`);
 
 
     const formDataToSend = new FormData();
@@ -201,7 +217,15 @@ const generateCandidateId = () => {
 
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <>
+    <Navbar />
+    <button
+          className="bg-[#DBD8E3] text-black px-4 py-2 rounded-lg hover:bg-[#5C5470] hover:text-white"
+          onClick={() => navigate(-1)}
+        >
+          Go Back
+        </button>
+    <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       {currentPage === 1 && (
         <>
           {/* Header Section */}
@@ -316,6 +340,15 @@ const generateCandidateId = () => {
              onChange={handleInputChange}
              required
             />
+          </div>
+          <div>
+                <label className="block text-sm font-medium text-gray-700">Contact Number *</label>
+                <input type="text" name="contactNumber" value={formData.contactNumber} onChange={handleInputChange} className="mt-1 p-2 block w-full border border-gray-300 rounded-md" required />
+              </div>
+
+              <div >
+            <label className="block text-sm font-semibold">No of Years of Experience *</label>
+            <input type="number" name="noOfYearsExperience" value={formData.noOfYearsExperience} onChange={handleInputChange} className="mt-1 p-2 block w-full border border-gray-300 rounded-md" required />
           </div>
         </form>
       </div>
@@ -897,6 +930,7 @@ const generateCandidateId = () => {
         </>
       )}
     </div>
+    </>
   );
 };
 

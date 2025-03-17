@@ -17,11 +17,13 @@ const InitialPage = () => {
     <HeroSection />
     <GlobalEnvironment />
     
-      <JoinTeam />
+    <JobTable />
+     
+     
       
-      <CoreValues />
-      <JobTable />
+     
       <Testimonial />
+      <CoreValues />
       <LifeAtIFS />
    
     <Footer />

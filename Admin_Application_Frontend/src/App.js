@@ -5,6 +5,10 @@ import Form from './Pages/JobCreate';
 import JobView from './Pages/JobViewPage';
 import CandidateView from './Pages/CandidateView';
 import ProgerssPage from './Pages/ProgressPage';
+import JobList from './Pages/JobList';
+import CandidatesList from './Pages/CandidatesList';
+import CandidateCharts from './Pages/CandidateCharts';
+
 import './App.css'
 
 
@@ -19,6 +23,9 @@ function App() {
    <Route path="/form" element={< Form/>} />
    <Route path="/view" element={< CandidateView/>} />
    <Route path="/progress" element={< ProgerssPage/>} />
+   <Route path="/joblist" element={<JobList />} />
+   <Route path="/candidates/:jobId" element={<CandidatesList />} />
+   <Route path="/candidate-charts/:candidateID" element={<CandidateCharts />} />
    </Routes>
    </BrowserRouter>
   );

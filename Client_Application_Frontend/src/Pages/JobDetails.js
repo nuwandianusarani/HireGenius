@@ -1,72 +1,10 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
-// import { useParams, useNavigate } from 'react-router-dom';
 
-// const JobDetails = () => {
-//   const { jobID } = useParams();
-//   const navigate = useNavigate();
-//   console.log(jobID);  // Check if jobID is available
-//   const [job, setJob] = useState(null);
-
-//   useEffect(() => {
-//     const fetchJobDetails = async () => {
-//       try {
-//         const response = await axios.get(`http://localhost:5000/jobs/${jobID}`);
-//         setJob(response.data);
-//       } catch (error) {
-//         console.error('Error fetching job details:', error);
-//       }
-//     };
-//     fetchJobDetails();
-//   }, [jobID]);
-
-//   if (!job) {
-//     return <div>Loading...</div>;
-//   }
-
-//   const handleInterestedClick = () => {
-//     navigate(`/form/${job._id}`); // Navigate to FormPopup page with the job's _id
-//   };
-
-//   return (
-//     <div className="container mx-auto px-6 py-12">
-//       <h2 className="text-3xl font-bold text-purple-700 mb-6">Job Details</h2>
-//       <div className="bg-white border border-gray-200 rounded-md shadow-lg p-6">
-//         <h3 className="text-2xl font-semibold text-purple-600">Job Title: {job.jobTitle}</h3>
-//         <p><strong>Location:</strong> {job.jobLocation}</p>
-//         <p><strong>Job Type:</strong> {job.jobType}</p>
-//         <p><strong>Department:</strong> {job.jobDepartment}</p>
-//         <p><strong>Qualifications:</strong> {job.qualifications}</p>
-//         <p><strong>Required Skills:</strong> {job.requiredSkills}</p>
-//         <p><strong>Experience:</strong> {job.experience}</p>
-//         <p><strong>Duties:</strong> {job.duties}</p>
-//         {job.file_name && (
-//           <a
-//             href={`http://localhost:5000/uploads/general/${job.file_name}`}
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             className="text-blue-500 underline"
-//           >
-//             View PDF
-//           </a>
-//         )}
-//         <button
-//           onClick={handleInterestedClick}
-//           className="mt-6 px-4 py-2 bg-purple-700 text-white font-bold rounded-md hover:bg-purple-600"
-//         >
-//           I am Interested
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default JobDetails;
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Navbar from '../components/Navbar';
 
 const JobDetails = () => {
   const { jobID } = useParams();
@@ -109,6 +47,9 @@ const JobDetails = () => {
   };
 
   return (
+    <>
+    <Navbar />
+    
     <motion.div
       className="container mx-auto px-6 py-12 flex flex-col md:flex-row"
       initial={{ opacity: 0 }}
@@ -234,7 +175,7 @@ const JobDetails = () => {
 
         <motion.button
           onClick={handleInterestedClick}
-          className="mt-6 px-6 py-3 bg-purple-700 text-white font-bold rounded-md hover:bg-purple-600 shadow-lg"
+          className="mt-3 px-6 py-3 bg-purple-700 text-white font-bold rounded-md hover:bg-purple-600 shadow-lg"
           whileHover={{ scale: 1.1, backgroundColor: '#6B46C1', color: '#fff' }}
           whileTap={{ scale: 0.95 }}
         >
@@ -252,6 +193,7 @@ const JobDetails = () => {
         </motion.button>
       </motion.div>
     </motion.div>
+    </>
   );
 };
 

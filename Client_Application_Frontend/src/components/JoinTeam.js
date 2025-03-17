@@ -95,13 +95,8 @@ import video2 from '../assets/images/values.mp4';
 const JoinTeam = () => {
   return (
     <section
-      className="relative bg-gray-50 py-12"
-      style={{
-        backgroundImage: `linear-gradient(rgba(25, 42, 86, 0.8), rgba(25, 42, 86, 0.8)), url('https://source.unsplash.com/1600x900/?teamwork,office')`,
-        backgroundAttachment: 'fixed',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-      }}
+      className="relative bg-gradient-to-r from-[#352F44] via-[#5C5470] to-[#DBD8E3] opacity-7 py-12"
+    
     >
       <div className="container mx-auto px-4">
         <motion.div

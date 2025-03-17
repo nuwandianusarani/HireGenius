@@ -1,14 +1,17 @@
+
+
 import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="relative bg-purple-900 text-white">
-      <div className="absolute inset-x-0 top-0 h-64 bg-purple-900 rounded-b-full"></div>
+    <footer className="relative bg-[#2A2438] text-[#DBD8E3]">
+      <div className="absolute inset-x-0 top-0 h-64 bg-[#2A2438] rounded-b-full"></div>
       <div className="relative max-w-7xl mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+        
         {/* Industries Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Industries</h3>
-          <ul className="space-y-2">
+          <h3 className="text-lg font-semibold mb-4 text-[#DBD8E3]">Industries</h3>
+          <ul className="space-y-2 text-[#DBD8E3] opacity-80 hover:opacity-100 transition">
             <li>Aerospace and Defense</li>
             <li>Energy Utilities and Resources</li>
             <li>Construction and Engineering</li>
@@ -20,8 +23,8 @@ const Footer = () => {
 
         {/* Solutions Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Solutions</h3>
-          <ul className="space-y-2">
+          <h3 className="text-lg font-semibold mb-4 text-[#DBD8E3]">Solutions</h3>
+          <ul className="space-y-2 text-[#DBD8E3] opacity-80 hover:opacity-100 transition">
             <li>HireGenius Cloud</li>
             <li>Enterprise Resource Planning</li>
             <li>Enterprise Asset Management</li>
@@ -31,8 +34,8 @@ const Footer = () => {
 
         {/* Company Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Company</h3>
-          <ul className="space-y-2">
+          <h3 className="text-lg font-semibold mb-4 text-[#DBD8E3]">Company</h3>
+          <ul className="space-y-2 text-[#DBD8E3] opacity-80 hover:opacity-100 transition">
             <li>About Us</li>
             <li>Careers</li>
             <li>Contact Us</li>
@@ -42,8 +45,8 @@ const Footer = () => {
 
         {/* Customers & Partners Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Customers & Partners</h3>
-          <ul className="space-y-2">
+          <h3 className="text-lg font-semibold mb-4 text-[#DBD8E3]">Customers & Partners</h3>
+          <ul className="space-y-2 text-[#DBD8E3] opacity-80 hover:opacity-100 transition">
             <li>Customer Stories</li>
             <li>Find a HireGenius Partner</li>
             <li>Become a Partner</li>
@@ -51,16 +54,17 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="bg-purple-800 text-sm py-4">
+      {/* Footer Bottom Section */}
+      <div className="bg-[#352F44] text-sm py-4">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           <div className="space-x-4 mb-4 md:mb-0">
-            <a href="#" className="hover:underline">Privacy</a>
-            <a href="#" className="hover:underline">Legal</a>
-            <a href="#" className="hover:underline">Modern Slavery Act</a>
-            <a href="#" className="hover:underline">Careers</a>
-            <a href="#" className="hover:underline">Gender Pay Gap Report</a>
-            <a href="#" className="hover:underline">Report a Concern</a>
-            <a href="#" className="hover:underline">Cookies Settings</a>
+            <a href="#" className="hover:text-[#DBD8E3] transition">Privacy</a>
+            <a href="#" className="hover:text-[#DBD8E3] transition">Legal</a>
+            <a href="#" className="hover:text-[#DBD8E3] transition">Modern Slavery Act</a>
+            <a href="#" className="hover:text-[#DBD8E3] transition">Careers</a>
+            <a href="#" className="hover:text-[#DBD8E3] transition">Gender Pay Gap Report</a>
+            <a href="#" className="hover:text-[#DBD8E3] transition">Report a Concern</a>
+            <a href="#" className="hover:text-[#DBD8E3] transition">Cookies Settings</a>
           </div>
           <div className="text-center md:text-right">
             &copy; {new Date().getFullYear()} HireGenius. All rights reserved.
