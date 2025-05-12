@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const Stage2 = () => {
-  const totalLevels = 3; // Total number of levels
+  const totalLevels = 3; 
   const [unlockedLevel, setUnlockedLevel] = useState(1);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Stage2 = () => {
           textShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
         }}
       >
-        Hire Genius
+        HireGenius
       </div>
 
       <div className="level-map bg-image d-flex flex-column justify-content-center align-items-center">

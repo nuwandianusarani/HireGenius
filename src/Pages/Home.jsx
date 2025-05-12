@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { ScrollControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { EffectComposer, Noise } from "@react-three/postprocessing";
@@ -8,11 +9,13 @@ import { usePlay } from "../contexts/Play";
 
 function Home() {
   const { play, end } = usePlay();
+  localStorage.removeItem("completedStages");
+
 
   const effects = useMemo(
     () => (
       <EffectComposer>
-        <Noise opacity={0.08} />
+        <Noise opacity={0.09} />
       </EffectComposer>
     ),
     []
