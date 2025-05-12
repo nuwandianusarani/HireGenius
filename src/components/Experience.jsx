@@ -64,7 +64,7 @@ export const Experience = () => {
         curvePoints[1].z
       ),
       title: "Welcome",
-      subtitle: `Welcome to Hire Genius ! Sit back, relax, and enjoy the journey.`,
+      subtitle: `Welcome to HireGenius! Sit back, relax, and enjoy the journey.`,
       answered: false,
     },
     {

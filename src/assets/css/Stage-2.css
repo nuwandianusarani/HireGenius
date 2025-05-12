@@ -1,0 +1,75 @@
+/* Neon text effect */
+.neon-text {
+    color: #fff;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px #ff00de,
+      0 0 40px #ff00de,
+      0 0 80px #ff00de;
+  }
+  
+  /* Neon button effect */
+  .neon-button {
+    background-color: transparent;
+    border: 2px solid #ff00de;
+    color: #ff00de;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow:
+      0 0 5px #ff00de,
+      0 0 10px #ff00de,
+      0 0 20px #ff00de;
+  }
+  
+  .neon-button:hover {
+    background-color: #ff00de;
+    color: #000;
+    box-shadow:
+      0 0 10px #ff00de,
+      0 0 20px #ff00de,
+      0 0 40px #ff00de;
+  }
+  
+  /* Rainbow animation */
+  @keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .rainbow-bg {
+    background: linear-gradient(45deg, #ff00de, #00ffea, #ff00de, #00ffea);
+    background-size: 400% 400%;
+    animation: rainbow 5s ease infinite;
+  }
+
+  .neon-green-border {
+    border: 2px solid #00ffea;
+    color: #00ffea;
+    background: none;
+    border-radius: 8px;
+    padding: 10px;
+    display: inline-block;
+    max-width: 60%;
+    box-shadow: 0 0 5px #00ffea, 
+                0 0 10px #00ffea, 
+                0 0 20px #00ffea;
+    text-shadow: 0 0 5px #00ffea, 
+                 0 0 10px #00ffea, 
+                 0 0 20px #00ffea;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  /* Optional: Glow effect on hover */
+  .neon-green-border:hover {
+    box-shadow: 0 0 10px #00ff00, 
+                0 0 20px #00ff00, 
+                0 0 40px #00ff00;
+    text-shadow: 0 0 10px #00ff00, 
+                 0 0 20px #00ff00, 
+                 0 0 40px #00ff00;
+  }
+  

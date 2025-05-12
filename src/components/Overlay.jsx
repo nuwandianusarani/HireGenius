@@ -26,11 +26,11 @@ export const Overlay = () => {
       {progress === 100 && (
         <div className={`intro ${play ? "intro--disappear" : ""}`}>
           <h1 className="logo">
-            Hire Genius
+            HireGenius
             <div className="spinner">
             </div>
           </h1>
-          <p className="intro__scroll">Keep Scrolling to begin the journey</p>
+          <p className="intro__scroll">Scroll to begin the journey</p>
           <button
             className="explore"
             onClick={() => {

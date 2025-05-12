@@ -1,0 +1,61 @@
+/* Rainbow Background Effect (smooth transition over 30s) */
+body {
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 400% 400%;
+    animation: rainbow 30s ease infinite;
+  }
+  
+  @keyframes rainbow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Centered Content */
+  .container {
+    color: white;
+  }
+  
+  /* Neon Effect on "Thank You" Text */
+  .thanks-text {
+    color: white;
+    font-size: 3rem;
+    text-shadow: 
+      0 0 5px #fff, 
+      0 0 10px #fff, 
+      0 0 15px #ff00ff, 
+      0 0 20px #ff00ff, 
+      0 0 30px #ff00ff, 
+      0 0 40px #ff00ff, 
+      0 0 50px #ff00ff;
+  }
+  
+  /* Button Styles with Solid Colors */
+  .result-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.8em 2em;
+    border-radius: 10px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #007bff, 0 0 20px #007bff;
+  }
+  
+  .result-btn:hover {
+    background-color: #0056b3;
+    box-shadow: 0 0 15px #007bff, 0 0 30px #007bff;
+  }
+  
+  .result-btn:focus {
+    outline: none;
+  }
+  

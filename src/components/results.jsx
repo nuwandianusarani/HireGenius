@@ -1,66 +1,98 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import questions from '../Questions/Questions'; 
+import questionsData from '../assets/json/questions.json';
 
 function Results() {
   const [userAnswers, setUserAnswers] = useState([]);
+  const [totalScore, setTotalScore] = useState(0);
+  const [stage3Score, setStage3Score] = useState(0);
 
   useEffect(() => {
-    // Retrieve user answers from localStorage
+    const stage = localStorage.getItem('stage3Score') || 0;
+    setStage3Score(stage);
+
     const savedAnswers = JSON.parse(localStorage.getItem('userAnswers')) || [];
     setUserAnswers(savedAnswers);
+
+    // Calculate total score
+    let score = 0;
+    savedAnswers.forEach(answer => {
+      const question = questionsData.questions.find(q => q.Qid === answer.Qid);
+      if (question) {
+        const selectedOption = question.options.find(opt => opt.text === answer.answer);
+        if (selectedOption) {
+          score += selectedOption.score;
+        }
+      }
+    });
+
+    setTotalScore(score);
   }, []);
 
   return (
     <>
-    <div
-        style={{
-            backgroundColor:"black",
-        fontSize: "2rem",
-        fontWeight: "bold",
-        color: "#ffffff",
-        textShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
-        }}
-        className='p-2'
-    >
-        Hire Genius
-    </div>
-    <div className="container mt-2">
-      <h3 className="text-center mb-2">Your Interview Answers Overview</h3>
-      <div className="row gy-2">
-        {userAnswers.map((answer, index) => {
-          const question = questions.find(q => q.Qid === answer.Qid);
-          return (
-            <div
-              className="col-12"
-              key={index}
-              style={{ border: '1px solid #444', borderRadius: '10px', overflow: 'hidden', backgroundColor: '#212529' }}
-            >
-              <div
-                className="p-3 text-white"
-                style={{ backgroundColor: '#343a40', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-              >
-                <div style={{ fontWeight: 'bold', flex: 1 }}>{question?.question || 'Question not found'}</div>
-                <div>
-                  <span
-                    className="badge bg-primary"
-                    style={{ fontSize: '0.9rem', padding: '0.5em 0.8em', whiteSpace: 'nowrap' }}
-                  >
-                    {answer.category}
-                  </span>
+      {/* Header Section */}
+      <div className="bg-dark text-white p-3 text-center fw-bold fs-3">
+        HireGenius Admin View
+      </div>
+
+      {/* Score Display */}
+      <div className="container mt-3">
+        <div className="row text-center">
+          <div className="col-md-6 mb-3">
+            <div className="p-3 bg-light rounded shadow">
+              <h4 className="text-dark">Stage 2 Score</h4>
+              <h2 className="text-primary fw-bold">{totalScore}</h2>
+            </div>
+          </div>
+          <div className="col-md-6 mb-3">
+            <div className="p-3 bg-light rounded shadow">
+              <h4 className="text-dark">Stage 3 Score</h4>
+              <h2 className="text-success fw-bold">{stage3Score}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Answers Overview */}
+      <div className="container mt-4">
+        <h3 className="text-center mb-4 fw-bold text-dark">Interview Answers</h3>
+        <div className="row gy-3">
+          {userAnswers.map((answer, index) => {
+            const question = questionsData.questions.find(q => q.Qid === answer.Qid);
+            if (!question) return null;
+
+            const selectedOption = question.options.find(opt => opt.text === answer.answer);
+            const isCorrect = selectedOption ? selectedOption.correct : false;
+
+            return (
+              <div className="col-12" key={index}>
+                <div className="card border-0 shadow-lg">
+                  <div className="card-header bg-dark text-white d-flex justify-content-between">
+                    <span className="fw-bold">{question.question}</span>
+                    <div>
+                      <span className="badge bg-primary me-2">{answer.category}</span>
+                      <span className={`badge ${isCorrect ? 'bg-success' : 'bg-danger'}`}>
+                        {isCorrect ? 'Correct' : 'Incorrect'}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="card-body">
+                    <p className="mb-2">
+                      <strong>Your Answer:</strong> <span className="text-primary">{answer.answer}</span>
+                    </p>
+                    {selectedOption && (
+                      <p>
+                        <strong>Allocated Score:</strong> <span className="text-success">{selectedOption.score}</span>
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
-              <div
-                className="p-3 text-white"
-                style={{ fontSize: '1rem', lineHeight: '1.5', backgroundColor: '#212529' }}
-              >
-                <strong>Your Answer:</strong> {answer.answer}
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </div>
     </>
   );
 }
