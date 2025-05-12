@@ -311,19 +311,13 @@ export const Experience = () => {
 
   useFrame((_state, delta) => {
 
-
     const scrollOffset = Math.max(0, scroll.offset);
-    console.log("scrollOffset", scrollOffset);
 
     textSections.forEach((textSection) => {
 
       const distance = textSection.position.distanceTo(cameraGroup.current.position);
-      console.log("distance", distance);
-
       // Normalize distance for comparison
       const normalizedDistance = distance / FRICTION_DISTANCE; 
-
-      console.log("Normalized Distance:", normalizedDistance);
 
       if (normalizedDistance < 1 && !textSection.answered && !answeredSections.includes(textSection.Qid)) {
         // Set the current question for the modal
