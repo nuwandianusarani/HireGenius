@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../assets/css/Stage-1.css";
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
+import { db } from '../firebase/Firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 const characterModels = {
   Sandy: "/models/sandy.glb",
@@ -27,9 +29,7 @@ const characterDescriptions = {
   Garfield: "Garfield knows how to work smart, not hard—because efficiency is key!",
 };
 
-
 export default function Level1() {
-
   const navigate = useNavigate();
   const [applyingPosition, setApplyingPosition] = useState('');
   const [formData, setFormData] = useState({
@@ -120,6 +120,7 @@ export default function Level1() {
     if (!validateForm()) return;
 
     setIsLoading(true);
+
     const candidateData = {
       candidate: {
         name: formData.name,
@@ -133,53 +134,44 @@ export default function Level1() {
       },
     };
 
-    localStorage.setItem("candidateData", JSON.stringify(candidateData));
-
+    // localStorage.setItem("candidateData", JSON.stringify(candidateData));
 
     try {
       const response = await fetch("http://127.0.0.1:5000/get_category", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json" 
+        },
         body: JSON.stringify(candidateData),
       });
     
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-    
-      const result = await response.json();
-
-      // const result = {
-      //   "category": "mid level",
-      //   "status": "success"
+      // if (!response.ok) {
+      //   throw new Error(`HTTP error! Status: ${response.status}`);
       // }
+      const result = await response.json();
     
       if (result.status === "success") {
-        console.log("Category:", result.category);
-        
-        // Save result to localStorage
-        localStorage.setItem("categoryResult", JSON.stringify(result));
+        await addDoc(collection(db, "candidates"), {
+          candidate: candidateData,
+          category: result.category,
+          createdAt: new Date()
+        });
+
+        // console.log('Data added:', result);     
+        // localStorage.setItem("categoryResult", JSON.stringify(result));
         localStorage.setItem("completedStages", JSON.stringify(["Stage 1"]));
         navigate("/stage-2");
-
       } else {
         toast.error('Something went wrong.');
         console.error("Request failed:", result);
-        
       }
     } catch (error) {
       console.error("Error submitting data:", error.message);
       toast.error('Something went wrong.');
     }    
     setIsLoading(false);
-
-  };
-
-  // {
-  //   "category": "mid level",
-  //   "status": "success"
-  // }
-  
+  };  
 
   return (
     <div className="bg-dark">
@@ -249,10 +241,10 @@ export default function Level1() {
                   <label className="form-label neon-text">Experience</label>
                   <select name="experience" className="form-select neon-input" value={formData.experience} onChange={handleChange}>
                     <option value="">Select</option>
-                    <option value="Below 1 year">Below 1 year</option>
-                    <option value="1-2 years">1-2 years</option>
-                    <option value="2-5 years">2-5 years</option>
-                    <option value="5+ years">5+ years</option>
+                    <option value="Below 1 year">Below 1 Year</option>
+                    <option value="1-2 years">1-2 Years</option>
+                    <option value="2-5 years">2-5 Years</option>
+                    <option value="5-10 years">5-10 Years</option>
                   </select>
                   {errors.experience && <div className="text-danger">{errors.experience}</div>}
                 </div>
@@ -261,6 +253,7 @@ export default function Level1() {
                   <select name="leadership" className="form-select neon-input" value={formData.leadership} onChange={handleChange}>
                     <option value="">Select</option>
                     <option value="No experience">No experience</option>
+                    <option value="1-2 years experience">1-2 years experience</option>
                     <option value="2-5 years experience">2-5 years experience</option>
                     <option value="5+ years experience">5+ years experience</option>
                   </select>
