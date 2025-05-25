@@ -1,0 +1,1 @@
+export const APP_URL = 'https://hire-genius-classification-model.onrender.com';

@@ -7,6 +7,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 import { db } from '../firebase/Firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import { APP_URL } from "../constants/Config";
+import skyThemeStyles from "./skyThemeStyles";
 
 const characterModels = {
   Sandy: "/models/sandy.glb",
@@ -25,8 +27,27 @@ const characterDescriptions = {
   IronMan: "Iron Man combines intelligence and innovation, always thinking two steps ahead!",
   JimmyNeutron: "Jimmy Neutron is full of bright ideas and quick solutions, a true problem solver!",
   MasterSplinter: "Master Splinter is wise and strategic, guiding every decision with patience and insight!",
-  Zuko: "Zuko’s determination and resilience make him unstoppable, turning setbacks into comebacks!",
+  Zuko: "Zuko's determination and resilience make him unstoppable, turning setbacks into comebacks!",
   Garfield: "Garfield knows how to work smart, not hard—because efficiency is key!",
+};
+
+const characterEmojis = {
+  Sandy: "🖥️🌊",
+  MinnieMouse: "🎨🧠",
+  IronMan: "💻🛡️",
+  JimmyNeutron: "🧠🔧",
+  MasterSplinter: "📚🧘",
+  Zuko: "🔥👨‍💻",
+  Garfield: "⌛🐱",
+};
+
+// Add inline styles for error messages to ensure they display properly
+const errorMessageStyle = {
+  color: '#dc3545',
+  fontSize: '0.875rem',
+  marginTop: '0.25rem',
+  display: 'block',
+  fontWeight: '500'
 };
 
 export default function Level1() {
@@ -45,6 +66,8 @@ export default function Level1() {
   const [selectedCharacter, setSelectedCharacter] = useState("Sandy");
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
 
   useEffect(() => {
     const position = localStorage.getItem('applying_position') || 'Senior Engineer';
@@ -70,10 +93,19 @@ export default function Level1() {
     setIsLoading(false);
   }, [formData]);
 
+  const showToastMessage = (message, isSuccess = true) => {
+    setToastMessage(message);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: "" })); 
+    // Clear error when user starts typing/selecting
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
 
   function assignCharacter(experience, leadership, english, gender, salary, age) {
@@ -104,20 +136,48 @@ export default function Level1() {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name) newErrors.name = "Name is required";
-    if (!formData.age) newErrors.age = "Age is required";
-    if (!formData.experience) newErrors.experience = "Experience is required";
-    if (!formData.leadership) newErrors.leadership = "Leadership experience is required";
-    if (!formData.english) newErrors.english = "English proficiency is required";
-    if (!formData.gender) newErrors.gender = "Gender is required";
-    if (!formData.salary) newErrors.salary = "Salary expectation is required";
+    
+    // Validate each field
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+    
+    if (!formData.age || formData.age <= 0) {
+      newErrors.age = "Valid age is required";
+    }
+    
+    if (!formData.experience) {
+      newErrors.experience = "Experience level is required";
+    }
+    
+    if (!formData.leadership) {
+      newErrors.leadership = "Leadership experience is required";
+    }
+    
+    if (!formData.english) {
+      newErrors.english = "English proficiency is required";
+    }
+    
+    if (!formData.gender) {
+      newErrors.gender = "Gender selection is required";
+    }
+    
+    if (!formData.salary || formData.salary <= 0) {
+      newErrors.salary = "Valid salary expectation is required";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    
+    if (!validateForm()) {
+      // Show toast message for validation errors
+      toast.error('Please fill in all required fields correctly.');
+      return;
+    }
 
     setIsLoading(true);
 
@@ -134,10 +194,8 @@ export default function Level1() {
       },
     };
 
-    // localStorage.setItem("candidateData", JSON.stringify(candidateData));
-
     try {
-      const response = await fetch("http://127.0.0.1:5000/get_category", {
+      const response = await fetch( 'http://127.0.0.1:5000' + "/get_category", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -146,9 +204,10 @@ export default function Level1() {
         body: JSON.stringify(candidateData),
       });
     
-      // if (!response.ok) {
-      //   throw new Error(`HTTP error! Status: ${response.status}`);
-      // }
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
       const result = await response.json();
     
       if (result.status === "success") {
@@ -158,8 +217,8 @@ export default function Level1() {
           createdAt: new Date()
         });
 
-        // console.log('Data added:', result);     
-        // localStorage.setItem("categoryResult", JSON.stringify(result));
+        console.log('Data added:', result);     
+        localStorage.setItem("categoryResult", JSON.stringify(result));
         localStorage.setItem("completedStages", JSON.stringify(["Stage 1"]));
         navigate("/stage-2");
       } else {
@@ -171,115 +230,191 @@ export default function Level1() {
       toast.error('Something went wrong.');
     }    
     setIsLoading(false);
-  };  
+  };
 
   return (
-    <div className="bg-dark">
-      <Toaster />
-      <div className="container-fluid d-flex vh-100 p-4 neon-bg">
-        <div className="col-md-6 d-flex flex-column justify-content-center align-items-center character-display neon-card">
-        <div
-            style={{
-              fontSize: "2.5rem",
-              fontWeight: "bold",
-              color: "#ffffff",
-              textShadow: "0 0 10px rgba(255, 255, 255, 0.8)",
-            }}
-          >
-            HireGenius
-          </div>
-          <h3 className="text-center mb-4 neon-text">Your Character</h3>
-          <div className="w-100 h-100 d-flex justify-content-center align-items-center character-canvas">
-            {isLoading ? (
-              <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            ) : (
-              <Canvas>
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} />
-                <OrbitControls enableZoom={true} />
-                <Suspense fallback={null}>
-                  <Character character={selectedCharacter} />
-                </Suspense>
-              </Canvas>
-            )}
-          </div>
-          <div className="mt-3 text-center neon-text">
-            <h4>{formData.name || "Your Character"}</h4>
-            <p>{characterDescriptions[selectedCharacter]}</p>
-          </div>
+    <>
+      <style>{skyThemeStyles}</style>
+      <Toaster position="top-right" />
+      <div className="sky-container">
+        <div className="toast">{toastMessage}</div>
+        
+        <div className="clouds">
+          <div className="cloud cloud-1"></div>
+          <div className="cloud cloud-2"></div>
+          <div className="cloud cloud-3"></div>
         </div>
 
-        <div className="col-md-6 p-4 neon-card">
-          <h2 className="text-center mb-4 neon-text">Customize Your Character</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="mb-3">
-                  <label className="form-label neon-text">Your Name</label>
-                  <input type="text" name="name" className="form-control neon-input" value={formData.name} onChange={handleChange} />
-                  {errors.name && <div className="text-danger">{errors.name}</div>}
-                </div>
-                <div className="mb-3">
-                  <label className="form-label neon-text">Age</label>
-                  <input type="number" name="age" className="form-control neon-input" value={formData.age} onChange={handleChange} />
-                  {errors.age && <div className="text-danger">{errors.age}</div>}
-                </div>
-                <div className="mb-3">
-                  <label className="form-label neon-text">Gender</label>
-                  <select name="gender" className="form-select neon-input" value={formData.gender} onChange={handleChange}>
-                    <option value="">Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
-                  {errors.gender && <div className="text-danger">{errors.gender}</div>}
-                </div>
+        <div className="game-title">HireGenius</div>
+        
+        <div className="main-content">
+          <div className="character-section">
+            <div className="character-card">
+              <div className="character-info">
+                <h3>Your Character</h3>
               </div>
-              <div className="col-md-6">
-                <div className="mb-3">
-                  <label className="form-label neon-text">Experience</label>
-                  <select name="experience" className="form-select neon-input" value={formData.experience} onChange={handleChange}>
-                    <option value="">Select</option>
-                    <option value="Below 1 year">Below 1 Year</option>
-                    <option value="1-2 years">1-2 Years</option>
-                    <option value="2-5 years">2-5 Years</option>
-                    <option value="5-10 years">5-10 Years</option>
-                  </select>
-                  {errors.experience && <div className="text-danger">{errors.experience}</div>}
-                </div>
-                <div className="mb-3">
-                  <label className="form-label neon-text">Leadership</label>
-                  <select name="leadership" className="form-select neon-input" value={formData.leadership} onChange={handleChange}>
-                    <option value="">Select</option>
-                    <option value="No experience">No experience</option>
-                    <option value="1-2 years experience">1-2 years experience</option>
-                    <option value="2-5 years experience">2-5 years experience</option>
-                    <option value="5+ years experience">5+ years experience</option>
-                  </select>
-                  {errors.leadership && <div className="text-danger">{errors.leadership}</div>}
-                </div>
-                <div className="mb-3">
-                  <label className="form-label neon-text">English Proficiency</label>
-                  <select name="english" className="form-select neon-input" value={formData.english} onChange={handleChange}>
-                    <option value="">Select</option>
-                    <option value="Beginner">Beginner</option>
-                    <option value="Intermediate">Intermediate</option>
-                    <option value="Fluent">Fluent</option>
-                  </select>
-                  {errors.english && <div className="text-danger">{errors.english}</div>}
+              
+              <div className="character-display">
+                <div className="character-glow"></div>
+                {isLoading ? (
+                  <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column',
+                    justifyContent: 'center', 
+                    alignItems: 'center', 
+                    height: '100%',
+                    fontSize: '1.2rem',
+                    color: '#1565c0'
+                  }}>
+                    <div className="loading-spinner"></div>
+                    Loading Character...
+                  </div>
+                ) : (
+                  <div className="character-emoji">
+                    {characterEmojis[selectedCharacter]}
+                  </div>
+                )}
+              </div>
+              
+              <div className="character-info">
+                <h3>{formData.name || "Your Character"}</h3>
+                <div className="character-description">
+                  {characterDescriptions[selectedCharacter]}
                 </div>
               </div>
             </div>
-            <div className="mb-3">
-              <label className="form-label neon-text">Salary Expectation</label>
-              <input type="number" name="salary" className="form-control neon-input" min="0" value={formData.salary} onChange={handleChange} />
-              {errors.salary && <div className="text-danger">{errors.salary}</div>}
+          </div>
+
+          <div className="form-section">
+            <div className="form-card">
+              <h2 className="form-title">Customize Your Character</h2>
+              
+              <form onSubmit={handleSubmit}>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label className="form-label">Your Name *</label>
+                    <input 
+                      type="text" 
+                      name="name" 
+                      className={`form-input ${errors.name ? 'error' : ''}`}
+                      value={formData.name} 
+                      onChange={handleChange}
+                      placeholder="Enter your name"
+                    />
+                    {errors.name && <span style={errorMessageStyle}>{errors.name}</span>}
+                  </div>
+                  
+                  <div className="form-group">
+                    <label className="form-label">Age *</label>
+                    <input 
+                      type="number" 
+                      name="age" 
+                      className={`form-input ${errors.age ? 'error' : ''}`}
+                      value={formData.age} 
+                      onChange={handleChange}
+                      placeholder="Your age"
+                      min="1"
+                    />
+                    {errors.age && <span style={errorMessageStyle}>{errors.age}</span>}
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label className="form-label">Gender *</label>
+                    <select 
+                      name="gender" 
+                      className={`form-select ${errors.gender ? 'error' : ''}`}
+                      value={formData.gender} 
+                      onChange={handleChange}
+                    >
+                      <option value="">Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                    {errors.gender && <span style={errorMessageStyle}>{errors.gender}</span>}
+                  </div>
+                  
+                  <div className="form-group">
+                    <label className="form-label">Experience *</label>
+                    <select 
+                      name="experience" 
+                      className={`form-select ${errors.experience ? 'error' : ''}`}
+                      value={formData.experience} 
+                      onChange={handleChange}
+                    >
+                      <option value="">Select Experience</option>
+                      <option value="Below 1 year">Below 1 Year</option>
+                      <option value="1-2 years">1-2 Years</option>
+                      <option value="2-5 years">2-5 Years</option>
+                      <option value="5-10 years">5-10 Years</option>
+                    </select>
+                    {errors.experience && <span style={errorMessageStyle}>{errors.experience}</span>}
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label className="form-label">Leadership Experience *</label>
+                    <select 
+                      name="leadership" 
+                      className={`form-select ${errors.leadership ? 'error' : ''}`}
+                      value={formData.leadership} 
+                      onChange={handleChange}
+                    >
+                      <option value="">Select Leadership</option>
+                      <option value="No experience">No experience</option>
+                      <option value="1-2 years experience">1-2 years experience</option>
+                      <option value="2-5 years experience">2-5 years experience</option>
+                      <option value="5+ years experience">5+ years experience</option>
+                    </select>
+                    {errors.leadership && <span style={errorMessageStyle}>{errors.leadership}</span>}
+                  </div>
+                  
+                  <div className="form-group">
+                    <label className="form-label">English Proficiency *</label>
+                    <select 
+                      name="english" 
+                      className={`form-select ${errors.english ? 'error' : ''}`}
+                      value={formData.english} 
+                      onChange={handleChange}
+                    >
+                      <option value="">Select Proficiency</option>
+                      <option value="Beginner">Beginner</option>
+                      <option value="Intermediate">Intermediate</option>
+                      <option value="Fluent">Fluent</option>
+                    </select>
+                    {errors.english && <span style={errorMessageStyle}>{errors.english}</span>}
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Salary Expectation *</label>
+                  <input 
+                    type="number" 
+                    name="salary" 
+                    className={`form-input ${errors.salary ? 'error' : ''}`}
+                    min="1" 
+                    value={formData.salary} 
+                    onChange={handleChange}
+                    placeholder="Expected salary"
+                  />
+                  {errors.salary && <span style={errorMessageStyle}>{errors.salary}</span>}
+                </div>
+
+                <button 
+                  type="submit"
+                  className="submit-button" 
+                  disabled={isLoading}
+                >
+                  {isLoading && <div className="loading-spinner"></div>}
+                  {isLoading ? 'Submitting...' : 'Submit & Go to Next Stage'}
+                </button>
+              </form>
             </div>
-            <button type="submit" className="btn btn-success w-100 neon-button">Submit & Go to Next Stage</button>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
