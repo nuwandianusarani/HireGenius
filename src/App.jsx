@@ -6,13 +6,15 @@ import ChatInterview from "./components/ChatInterview";
 import Level1 from "./levels/level1";
 import Stage3 from "./Pages/Stage3";
 import ThanksPage from "./Pages/ThanksPage";
+import Login from "./auth/Login";
 
 function App() {
   
   return (
     <Router future={{ v7_startTransition: true }}>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/welcome" element={<Home />} />
         <Route path="/dashboard" element={<CanvasScene />} />
         <Route path="/stage-1" element={<Level1/>} />
         <Route path="/stage-2" element={<ChatInterview/>} />
