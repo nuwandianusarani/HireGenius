@@ -9,6 +9,7 @@ import { db } from '../firebase/Firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { APP_URL } from "../constants/Config";
 import skyThemeStyles from "./skyThemeStyles";
+import { getAuth } from "firebase/auth";
 
 const characterModels = {
   Sandy: "/models/sandy.glb",
@@ -61,6 +62,7 @@ export default function Level1() {
     english: "",
     gender: "",
     salary: "",
+    position: ""
   });
 
   const [selectedCharacter, setSelectedCharacter] = useState("Sandy");
@@ -68,10 +70,17 @@ export default function Level1() {
   const [errors, setErrors] = useState({});
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
-    const position = localStorage.getItem('applying_position') || 'Senior Engineer';
-    setApplyingPosition(position);
+    // const position = localStorage.getItem('applying_position') || 'Senior Engineer';
+    // setApplyingPosition(position);
+
+    const auth = getAuth();
+    const user = auth.currentUser;
+    setEmail(user.email);
+
+    // const email = localStorage.getItem('userEmail');
 
     const completedStages = JSON.parse(localStorage.getItem("completedStages")) || [];
     if (completedStages.includes("Stage 1")) {
@@ -161,6 +170,10 @@ export default function Level1() {
     if (!formData.gender) {
       newErrors.gender = "Gender selection is required";
     }
+
+    if (!formData.position) {
+      newErrors.position = "Position selection is required";
+    }
     
     if (!formData.salary || formData.salary <= 0) {
       newErrors.salary = "Valid salary expectation is required";
@@ -191,11 +204,12 @@ export default function Level1() {
         english_proficiency: formData.english,
         salary_expectation: formData.salary,
         gender: formData.gender,
+        position: formData.position
       },
     };
 
     try {
-      const response = await fetch( 'http://127.0.0.1:5000' + "/get_category", {
+      const response = await fetch( APP_URL + "/get_category", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -214,6 +228,7 @@ export default function Level1() {
         await addDoc(collection(db, "candidates"), {
           candidate: candidateData,
           category: result.category,
+          email: email,
           createdAt: new Date()
         });
 
@@ -388,18 +403,37 @@ export default function Level1() {
                   </div>
                 </div>
 
-                <div className="form-group">
-                  <label className="form-label">Salary Expectation *</label>
-                  <input 
-                    type="number" 
-                    name="salary" 
-                    className={`form-input ${errors.salary ? 'error' : ''}`}
-                    min="1" 
-                    value={formData.salary} 
-                    onChange={handleChange}
-                    placeholder="Expected salary"
-                  />
-                  {errors.salary && <span style={errorMessageStyle}>{errors.salary}</span>}
+                <div className="form-row">
+                  <div className="form-group">
+                    <label className="form-label">Applying Position *</label>
+                    <select 
+                      name="position" 
+                      className={`form-select ${errors.position ? 'error' : ''}`}
+                      value={formData.position} 
+                      onChange={handleChange}
+                    >
+                      <option value="">Apply Position</option>
+                      <option value="Trainee">Trainee</option>
+                      <option value="Junior Developer">Junior Developer</option>
+                      <option value="Senior Engineer">Senior Engineer</option>
+                      <option value="Associate Engineer">Associate Engineer</option>
+                    </select>
+                    {errors.position && <span style={errorMessageStyle}>{errors.position}</span>}
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label">Salary Expectation *</label>
+                    <input 
+                      type="number" 
+                      name="salary" 
+                      className={`form-input ${errors.salary ? 'error' : ''}`}
+                      min="1" 
+                      value={formData.salary} 
+                      onChange={handleChange}
+                      placeholder="Expected salary"
+                    />
+                    {errors.salary && <span style={errorMessageStyle}>{errors.salary}</span>}
+                  </div>
                 </div>
 
                 <button 

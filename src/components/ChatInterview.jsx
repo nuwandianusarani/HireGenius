@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../assets/css/Stage-2.css'; 
 import { db } from '../firebase/Firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import { getAuth } from "firebase/auth";
 
 const NeonPopup = ({ onStart }) => (
   <div className="sky-popup-overlay">
@@ -29,6 +30,8 @@ function ChatInterview() {
   const chatBoxRef = useRef(null);
   const navigate = useNavigate();
 
+  const [email, setEmail] = useState('');
+
   useEffect(() => {
     const completedStages = JSON.parse(localStorage.getItem("completedStages")) || [];
     if (completedStages.includes("Stage 2")) {
@@ -38,6 +41,10 @@ function ChatInterview() {
 
   // Fetch user category and filter questions
   useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    setEmail(user.email);
+
     const categoryResult = JSON.parse(localStorage.getItem('categoryResult'));
     if (!categoryResult || !categoryResult.category) {
       alert('Category not found. Redirecting to Stage 1.');
@@ -110,6 +117,7 @@ function ChatInterview() {
     try {
       await addDoc(collection(db, "chats"), {
         result: savedAnswers,
+        email: email,
         createdAt: new Date()
       });
     } catch (error) {

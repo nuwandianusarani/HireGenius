@@ -7,13 +7,15 @@ import Level1 from "./levels/level1";
 import Stage3 from "./Pages/Stage3";
 import ThanksPage from "./Pages/ThanksPage";
 import Login from "./auth/Login";
+import DevOps from "./Pages/DevOps";
+import SkillsMap from "./Pages/SkillsMap";
 
 function App() {
   
   return (
     <Router future={{ v7_startTransition: true }}>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<SkillsMap />} />
         <Route path="/welcome" element={<Home />} />
         <Route path="/dashboard" element={<CanvasScene />} />
         <Route path="/stage-1" element={<Level1/>} />
@@ -22,6 +24,8 @@ function App() {
         {/* <Route path="/results" element={<Results/>} /> */}
         <Route path="/level-1" element={<Level1/>} />
         <Route path="/thankyou" element={<ThanksPage/>} />
+        <Route path="/DevOps" element={<DevOps/>} />
+        <Route path="/SkillsMap" element={<SkillsMap/>} />
       </Routes>
     </Router>
   );

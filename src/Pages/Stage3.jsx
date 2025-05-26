@@ -5,6 +5,8 @@ import { CSS } from '@dnd-kit/utilities';
 import { db } from '../firebase/Firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import toast, { Toaster } from 'react-hot-toast';
+import { getAuth } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 
 const tasksList = [
   { id: 'task-1', content: 'Fix a critical production bug reported by a customer.' },
@@ -24,7 +26,16 @@ export default function Stage3() {
   const [gameOver, setGameOver] = useState(false);
   const [countdown, setCountdown] = useState(3); 
   const [finalScore, setFinalScore] = useState(null); 
-  const [userOrder, setUserOrder] = useState([]); 
+  const [userOrder, setUserOrder] = useState([]);
+  const [email, setEmail] = useState('');
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    setEmail(user.email);
+  }, []);
 
   // Countdown before starting the game
   useEffect(() => {
@@ -130,10 +141,15 @@ export default function Stage3() {
         accuracyScore: accuracyScore,
         timeBonus: timeBonus,
         totalScore: totalScore,
+        email: email,
         createdAt: new Date()
       });
 
       toast.success('You have successfully completed this challenge');
+
+      setTimeout(() => {
+        navigate('/SkillsMap');
+      }, 1000);
     } catch (error) {
       console.log('Error adding stage 03 marks to the database : ', error.message);
     }

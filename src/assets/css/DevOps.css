@@ -1,0 +1,205 @@
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  opacity: 1; 
+  pointer-events: none;
+}
+
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main Container */
+.container {
+  background-color: #161b22e5;
+  padding: 30px 40px;
+  box-shadow: 0 0 30px rgba(0, 255, 204, 0.1);
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header & Description */
+.header {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #00ffee;
+  text-shadow: 0 0 8px #00ffee;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.description {
+  color: #9da5b4;
+  font-size: 1.1em;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Drag and Drop Layout */
+.droppable-area {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* Sections */
+.section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.section-title {
+  font-size: 1.4em;
+  color: #00ffee;
+  text-shadow: 0 0 6px #00ffee;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Droppable Process Card */
+.droppable {
+  background-color: #1c2128;
+  border: 2px dashed #00ffee55;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 15px;
+  min-height: 100px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.droppable:hover {
+  background-color: #22272e;
+  border-color: #00ffeeaa;
+}
+
+.droppable-item {
+  background-color: #003333;
+  color: #00ffee;
+  border: 1px solid #00ffee88;
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: inline-block;
+  margin-top: 10px;
+  box-shadow: 0 0 8px #00ffee44;
+}
+
+/* Draggable Tool Item */
+.draggable-tool {
+  background-color: #003333;
+  color: #00ffee;
+  border: 2px solid #00ffee;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  cursor: grab;
+  box-shadow: 0 0 8px #00ffee88;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.draggable-tool:active {
+  transform: scale(0.96);
+  box-shadow: 0 0 16px #00ffeeaa;
+}
+
+/* Feedback Messages */
+.feedback {
+  font-size: 1.2em;
+  margin-top: 20px;
+}
+
+.correct {
+  color: #00ff88;
+  text-shadow: 0 0 6px #00ffaa;
+}
+
+.incorrect {
+  color: #ff4d4f;
+}
+
+/* Scoreboard & Timer */
+.scoreboard,
+.timer {
+  margin-top: 15px;
+  font-size: 1.3em;
+  color: #9da5b4;
+}
+
+
+.btn {
+  min-width: 180px;
+  height: 50px;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* Reset Button */
+.reset-btn {
+  background-color: #ff1744;
+  color: white;
+  border: none;
+}
+
+.reset-btn:hover {
+  background-color: #d50000;
+}
+
+/* Neon Button  */
+.neon-button {
+  background-color: #00bcd4;
+  color: #fff;
+  border: none;
+}
+
+.neon-button:hover {
+  background-color: #008ba3;
+}
+
+/* Neon Typography  */
+.neon-text {
+  color: #00ffcc;
+  text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .droppable-area {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .section {
+    width: 100%;
+  }
+
+  .container {
+    padding: 20px;
+  }
+}
