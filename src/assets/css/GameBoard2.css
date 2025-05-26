@@ -1,0 +1,438 @@
+/* Reset and global styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: linear-gradient(135deg, #87CEEB 0%, #E0F6FF 50%, #98D8E8 100%);
+  font-family: 'Segoe UI', 'Comic Sans MS', 'Trebuchet MS', sans-serif;
+  color: #2c3e50;
+  overflow: hidden;
+}
+
+/* Animated clouds background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse 800px 300px at 50% 200px, rgba(255,255,255,0.8) 0%, transparent 50%),
+    radial-gradient(ellipse 600px 200px at 80% 100px, rgba(255,255,255,0.6) 0%, transparent 50%),
+    radial-gradient(ellipse 400px 150px at 20% 300px, rgba(255,255,255,0.7) 0%, transparent 50%),
+    radial-gradient(ellipse 500px 180px at 70% 400px, rgba(255,255,255,0.5) 0%, transparent 50%);
+  animation: float-clouds 60s infinite linear;
+  z-index: -1;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+@keyframes float-clouds {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+/* Floating particles animation */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(255,255,255,0.6), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: float-particles 20s infinite linear;
+  z-index: -1;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+@keyframes float-particles {
+  0% { transform: translateY(100vh) rotate(0deg); }
+  100% { transform: translateY(-100vh) rotate(360deg); }
+}
+
+/* Center content within the body */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main game container - sky theme */
+.game-board {
+  padding: 30px !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  background: linear-gradient(180deg, 
+    rgba(135, 206, 235, 0.95) 0%,
+    rgba(173, 216, 230, 0.95) 30%,
+    rgba(224, 255, 255, 0.95) 70%,
+    rgba(240, 248, 255, 0.95) 100%) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 3px solid rgba(70, 130, 180, 0.3) !important;
+  box-shadow: 
+    0 20px 40px rgba(70, 130, 180, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border-radius: 20px !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Subtle sun effect in top corner */
+.game-board::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(255, 223, 0, 0.4) 0%, rgba(255, 140, 0, 0.2) 40%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+  animation: sun-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes sun-glow {
+  0% { 
+    box-shadow: 0 0 30px rgba(255, 223, 0, 0.3);
+    transform: scale(1);
+  }
+  100% { 
+    box-shadow: 0 0 50px rgba(255, 223, 0, 0.5);
+    transform: scale(1.1);
+  }
+}
+
+/* Header styling */
+.game-board header {
+  position: relative !important;
+  z-index: 10 !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(5px) !important;
+  border-radius: 15px !important;
+  padding: 15px 20px !important;
+  margin-bottom: 20px !important;
+  border: 2px solid rgba(70, 130, 180, 0.2) !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+.game-board header h2 {
+  color: #2980b9 !important;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5) !important;
+  font-weight: bold !important;
+  font-size: 2rem !important;
+}
+
+/* Button styling */
+.btn-danger {
+  background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+  border: none !important;
+  color: white !important;
+  padding: 10px 20px !important;
+  border-radius: 25px !important;
+  font-weight: bold !important;
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(231, 76, 60, 0.4) !important;
+}
+
+/* Stress bar container */
+.stress-bar-container {
+  background: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(5px) !important;
+  border: 2px solid rgba(70, 130, 180, 0.2) !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.stress-bar-fill {
+  border-radius: 8px !important;
+  background: linear-gradient(90deg, #27ae60, #2ecc71) !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Person box styling - cloud-like containers */
+.person-box {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 3px solid rgba(70, 130, 180, 0.3) !important;
+  border-radius: 20px !important;
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  color: #2c3e50 !important;
+  position: relative !important;
+  overflow: visible !important;
+  transition: all 0.3s ease !important;
+}
+
+.person-box:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 
+    0 15px 30px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Person box when drag over */
+.person-box[style*="border-color: rgb(0, 255, 170)"] {
+  border-color: #3498db !important;
+  box-shadow: 
+    0 0 20px rgba(52, 152, 219, 0.5),
+    0 15px 30px rgba(0, 0, 0, 0.15) !important;
+  background: rgba(52, 152, 219, 0.1) !important;
+}
+
+/* Person box titles */
+.person-box h5 {
+  color: #2980b9 !important;
+  font-weight: bold !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5) !important;
+  margin-bottom: 15px !important;
+  font-size: 1.3rem !important;
+}
+
+/* Sick leave indicator */
+.person-box span[style*="Sick Leave"] {
+  background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+  color: white !important;
+  border-radius: 15px !important;
+  font-size: 0.8rem !important;
+  padding: 4px 8px !important;
+  box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3) !important;
+}
+
+/* Task items in person boxes */
+.person-box > div > div {
+  background: rgba(52, 152, 219, 0.1) !important;
+  border: 2px solid rgba(52, 152, 219, 0.2) !important;
+  border-radius: 12px !important;
+  color: #2c3e50 !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.2s ease !important;
+}
+
+.person-box > div > div:hover {
+  background: rgba(52, 152, 219, 0.2) !important;
+  transform: translateX(3px) !important;
+}
+
+/* Remove task button */
+.person-box button {
+  color: #e74c3c !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 50% !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.9rem !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.2s ease !important;
+}
+
+.person-box button:hover {
+  background: #e74c3c !important;
+  color: white !important;
+  transform: scale(1.1) !important;
+}
+
+/* Task pool section */
+.task-pool {
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(5px) !important;
+  border-radius: 15px !important;
+  padding: 20px !important;
+  border: 2px solid rgba(70, 130, 180, 0.2) !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.task-pool h4 {
+  color: #2980b9 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5) !important;
+  margin-bottom: 15px !important;
+}
+
+/* Task card styling - floating cloud effect */
+.task-pool > div > div,
+div[style*="transform: CSS.Transform.toString(transform)"] {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(173, 216, 230, 0.8) 100%) !important;
+  border: 3px solid #3498db !important;
+  border-radius: 20px !important;
+  color: #2c3e50 !important;
+  font-weight: bold !important;
+  box-shadow: 
+    0 10px 20px rgba(52, 152, 219, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  cursor: grab !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Task card hover effect */
+div[style*="cursor: grab"]:hover {
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 
+    0 15px 30px rgba(52, 152, 219, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+  border-color: #2980b9 !important;
+}
+
+/* Task card when dragging */
+div[style*="cursor: grab"]:active {
+  cursor: grabbing !important;
+  transform: rotate(5deg) scale(0.95) !important;
+}
+
+/* Timer text in task cards */
+div[style*="cursor: grab"] > div {
+  color: #7f8c8d !important;
+  font-weight: normal !important;
+}
+
+/* Modal styling */
+.modal-content {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(173, 216, 230, 0.95) 100%) !important;
+  backdrop-filter: blur(15px) !important;
+  border: 3px solid rgba(52, 152, 219, 0.3) !important;
+  border-radius: 20px !important;
+  color: #2c3e50 !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+.modal-header {
+  border-bottom: 2px solid rgba(52, 152, 219, 0.2) !important;
+  background: rgba(52, 152, 219, 0.1) !important;
+}
+
+.modal-title {
+  color: #2980b9 !important;
+  font-weight: bold !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5) !important;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #27ae60, #2ecc71) !important;
+  border: none !important;
+  color: white !important;
+  padding: 10px 25px !important;
+  border-radius: 25px !important;
+  font-weight: bold !important;
+  box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3) !important;
+  transition: all 0.3s ease !important;
+  margin: 0 5px !important;
+}
+
+.btn-success:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(39, 174, 96, 0.4) !important;
+  background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
+}
+
+/* Close button styling */
+.btn-close-white {
+  background: rgba(231, 76, 60, 0.1) !important;
+  border-radius: 50% !important;
+  opacity: 0.8 !important;
+}
+
+.btn-close-white:hover {
+  background: rgba(231, 76, 60, 0.2) !important;
+  opacity: 1 !important;
+}
+
+/* Text colors for sky theme */
+.text-success {
+  color: #27ae60 !important;
+}
+
+.text-info {
+  color: #2980b9 !important;
+}
+
+.text-muted {
+  color: #7f8c8d !important;
+}
+
+/* People section layout */
+.d-flex.flex-wrap.justify-content-between {
+  gap: 20px !important;
+}
+
+/* Stress level text */
+p[style*="color: #fff"] {
+  color: #2c3e50 !important;
+  font-weight: bold !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  padding: 5px 15px !important;
+  border-radius: 15px !important;
+  display: inline-block !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .game-board {
+    padding: 15px !important;
+    border-radius: 0 !important;
+  }
+  
+  .game-board header h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .person-box {
+    min-width: 200px !important;
+  }
+}
+
+/* Additional animations for enhanced sky theme */
+@keyframes gentle-bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.person-box.animate {
+  animation: gentle-bounce 3s ease-in-out infinite;
+}
+
+/* Subtle wind effect for task cards */
+@keyframes gentle-sway {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(0.5deg); }
+  75% { transform: rotate(-0.5deg); }
+}
+
+div[style*="cursor: grab"] {
+  animation: gentle-sway 4s ease-in-out infinite;
+}

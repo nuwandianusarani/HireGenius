@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { DndContext, useDraggable, useDroppable } from '@dnd-kit/core';
+import { getAuth } from "firebase/auth";
+import { db } from '../firebase/Firebase';
+import { collection, addDoc } from 'firebase/firestore';
+import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const CSS = {
   Transform: {
@@ -39,6 +44,9 @@ export default function DevOps() {
     });
     
     const [showModal, setShowModal] = useState(false);
+    const [email, setEmail] = useState('');
+
+    const navigate = useNavigate();
     
     useEffect(() => {
         if (!data.isGameOver) {
@@ -48,6 +56,12 @@ export default function DevOps() {
             return () => clearInterval(timer);
         }
     }, [data.isGameOver]);
+
+    useEffect(() => {
+        const auth = getAuth();
+        const user = auth.currentUser;
+        setEmail(user.email);
+    }, []);
     
     const onDragEnd = (event) => {
         const { active, over } = event;
@@ -81,24 +95,35 @@ export default function DevOps() {
             tools: updatedTools,
             currentOrder: updatedOrder,
             score,
-            isGameOver: score === 50
+            isGameOver: score === 100
         });
     };
 
     const calculateScore = (order) => {
         let score = 0;
         for (let i = 0; i < order.length; i++) {
-          if (order[i] === data.correctOrder[i]) score += 12.5;
+          if (order[i] === data.correctOrder[i]) score += 25;
         }
         return score;
       };
     
-      const submitScore = () => {
-        const record = {
-          score: data.score,
-          time: data.time,
-        };
-        console.log('Score submitted:', record);
+      const submitScore = async () => {
+        try {
+          await addDoc(collection(db, "devOps"), {
+            score: data.score,
+            time: data.time,
+            email: email,
+            createdAt: new Date()
+          });
+
+          toast.success('Challenge submitted successfully');
+
+          setTimeout(() => {
+            navigate('/GameBoard');
+          }, 1000);
+        } catch (error) {
+          console.log('Error adding devOps data to the database : ', error.message);
+        }
       };
     
     const DraggableTool = ({ tool }) => {
@@ -135,6 +160,7 @@ export default function DevOps() {
                 ref={setNodeRef}
                 className={`sky-process ${isOver ? 'process-hover' : ''}`}
             >
+              <Toaster position="top-right" />
                 <div className="process-header">
                     <div className="process-icon">🏗️</div>
                     <div className="process-title">{process.content}</div>
@@ -539,11 +565,11 @@ export default function DevOps() {
           className="instructions-btn"
           onClick={() => setShowModal(true)}
         >
-          📘 Flight Instructions
+          📘 Challenge Instructions
         </button>
         
         <div className="sky-timer">
-          ⏱ Flight Time: {Math.floor(data.time / 60)}:
+          ⏱ Challenge Time: {Math.floor(data.time / 60)}:
           {(data.time % 60).toString().padStart(2, '0')}
         </div>
       </div>
@@ -551,14 +577,14 @@ export default function DevOps() {
       <DndContext onDragEnd={onDragEnd}>
         <div className="game-area">
           <div className="processes-section">
-            <h2 className="section-title">🏗️ Cloud Processes</h2>
+            <h2 className="section-title">🏗️ Processes</h2>
             {data.processes.map((process) => (
               <DroppableProcess key={process.id} process={process} />
             ))}
           </div>
           
           <div className="tools-section">
-            <h2 className="section-title">⚙️ Sky Tools</h2>
+            <h2 className="section-title">⚙️ SE Tools</h2>
             {data.tools.length === 0 ? (
               <div className="no-tools">All tools deployed to the clouds! ☁️</div>
             ) : (
@@ -583,7 +609,7 @@ export default function DevOps() {
             <div className="modal-body">
               <p>Welcome to the CI/CD Pipeline Sky Quest!</p>
               <ul>
-                <li>☁️ Drag devOps tools from the right panel to the correct devOps processes on the left</li>
+                <li>☁️ Drag tools from the right panel to the correct devOps processes on the left</li>
                 <li>✅ Match each tool with its corresponding process</li>
                 <li>🏆 Achieve a perfect score to complete your devOps Challenege</li>
                 <li>🚀 Launch your pipeline and soar to the next level!</li>
