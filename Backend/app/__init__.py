@@ -30,7 +30,7 @@ def create_app():
 
     # MongoDB connection
     client = MongoClient("mongodb+srv://Kushan:Kus12NG*MDB@cluster0.vssd7k3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-    db = client['ResumeProjectDB']
+    db = client['ResearchProjectNewDB']
 
     # Register Blueprints
     from app.routes.job_routes import job_routes

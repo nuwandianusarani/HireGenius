@@ -29,6 +29,8 @@ const JobApplicationForm = () => {
       github: "",
       twitter: "",
       website: "",
+      achievements: "",              // NEW
+    coursesCertifications: "",     // NEW
       message: "",
       rightToWork: '',
       vacancySource: '',
@@ -773,6 +775,35 @@ const JobApplicationForm = () => {
           {transcript && <p className="mt-2 text-gray-600">{transcript.name}</p>}
         </div>
       </div>
+
+       {/* Achievements - NEW */}
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold">Achievements</h3>
+              <textarea
+                name="achievements"
+                rows="4"
+                required
+                value={formData.achievements}
+                onChange={handleInputChange}
+                className="border border-gray-300 rounded-md p-2 w-full"
+                placeholder="List your notable achievements"
+              />
+            </div>
+
+            {/* Courses & Certifications - NEW */}
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold">Courses & Certifications</h3>
+              <textarea
+                name="coursesCertifications"
+                rows="4"
+                required
+                value={formData.coursesCertifications}
+                onChange={handleInputChange}
+                className="border border-gray-300 rounded-md p-2 w-full"
+                placeholder="Relevant courses or certifications"
+              />
+            </div>
+
 
 
     {/* Message Section */}

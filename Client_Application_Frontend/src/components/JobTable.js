@@ -45,8 +45,9 @@ const JobTable = () => {
             <thead className="bg-purple-700 text-white">
               <tr>
                 <th className="text-left px-4 py-2 border-b"><FaBriefcase className="inline-block mr-2" />Job Title</th>
+                <th className="text-left px-4 py-2 border-b"><FaBuilding className="inline-block mr-2" />Job Name</th>
                 <th className="text-left px-4 py-2 border-b"><FaUserTie className="inline-block mr-2" />Type of Employment</th>
-                <th className="text-left px-4 py-2 border-b"><FaBuilding className="inline-block mr-2" />Department</th>
+                
                 <th className="text-left px-4 py-2 border-b"><FaMapMarkerAlt className="inline-block mr-2" />Location</th>
               </tr>
             </thead>
@@ -60,8 +61,9 @@ const JobTable = () => {
                   whileTap={{ scale: 0.98 }}
                 >
                   <td className="px-4 py-2 border-b">{job.jobTitle}</td>
+                  <td className="px-4 py-2 border-b">{job.jobName}</td>
                   <td className="px-4 py-2 border-b">{job.jobType}</td>
-                  <td className="px-4 py-2 border-b">{job.jobDepartment}</td>
+                  
                   <td className="px-4 py-2 border-b">{job.jobLocation}</td>
                 </motion.tr>
               ))}

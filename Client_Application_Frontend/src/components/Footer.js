@@ -58,13 +58,13 @@ const Footer = () => {
       <div className="bg-[#352F44] text-sm py-4">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           <div className="space-x-4 mb-4 md:mb-0">
-            <a href="#" className="hover:text-[#DBD8E3] transition">Privacy</a>
-            <a href="#" className="hover:text-[#DBD8E3] transition">Legal</a>
-            <a href="#" className="hover:text-[#DBD8E3] transition">Modern Slavery Act</a>
-            <a href="#" className="hover:text-[#DBD8E3] transition">Careers</a>
-            <a href="#" className="hover:text-[#DBD8E3] transition">Gender Pay Gap Report</a>
-            <a href="#" className="hover:text-[#DBD8E3] transition">Report a Concern</a>
-            <a href="#" className="hover:text-[#DBD8E3] transition">Cookies Settings</a>
+            <a href="/" className="hover:text-[#DBD8E3] transition">Privacy</a>
+            <a href="/" className="hover:text-[#DBD8E3] transition">Legal</a>
+            <a href="/" className="hover:text-[#DBD8E3] transition">Modern Slavery Act</a>
+            <a href="/" className="hover:text-[#DBD8E3] transition">Careers</a>
+            <a href="/" className="hover:text-[#DBD8E3] transition">Gender Pay Gap Report</a>
+            <a href="/" className="hover:text-[#DBD8E3] transition">Report a Concern</a>
+            <a href="/" className="hover:text-[#DBD8E3] transition">Cookies Settings</a>
           </div>
           <div className="text-center md:text-right">
             &copy; {new Date().getFullYear()} HireGenius. All rights reserved.

@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Route, Routes, Switch } from 'react-router-dom';
+
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import CVUploadForm from './components/CVUploadForm';
 import FormPopUp from './Pages/Form';
 import InitialPage from './Pages/InitialPage';

@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import Footer from '../components/Footer';
-import JoinTeam from '../components/JoinTeam';
+
 import CoreValues from '../components/CoreValues';
 import GlobalEnvironment from '../components/GlobalEnvironment';
 import Testimonial from '../components/Testimonial';

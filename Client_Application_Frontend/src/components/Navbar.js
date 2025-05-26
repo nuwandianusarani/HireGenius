@@ -18,11 +18,11 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 text-[#DBD8E3]">
-          <a href="#" className="hover:text-[#5C5470] transition duration-300">Industries</a>
-          <a href="#" className="hover:text-[#5C5470] transition duration-300">Solutions</a>
-          <a href="#" className="hover:text-[#5C5470] transition duration-300">Customer Success</a>
-          <a href="#" className="hover:text-[#5C5470] transition duration-300">Partners</a>
-          <a href="#" className="hover:text-[#5C5470] transition duration-300">About</a>
+          <a href="/" className="hover:text-[#5C5470] transition duration-300">Industries</a>
+          <a href="/" className="hover:text-[#5C5470] transition duration-300">Solutions</a>
+          <a href="/" className="hover:text-[#5C5470] transition duration-300">Customer Success</a>
+          <a href="/" className="hover:text-[#5C5470] transition duration-300">Partners</a>
+          <a href="/" className="hover:text-[#5C5470] transition duration-300">About</a>
           <button className="border border-[#DBD8E3] text-[#DBD8E3] rounded-md px-4 py-1 hover:bg-[#DBD8E3] hover:text-[#2A2438] transition duration-300">
             Book a Demo
           </button>
@@ -39,11 +39,11 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-[#352F44] text-[#DBD8E3] space-y-4 py-4 px-6">
-          <a href="#" className="block hover:text-[#5C5470]">Industries</a>
-          <a href="#" className="block hover:text-[#5C5470]">Solutions</a>
-          <a href="#" className="block hover:text-[#5C5470]">Customer Success</a>
-          <a href="#" className="block hover:text-[#5C5470]">Partners</a>
-          <a href="#" className="block hover:text-[#5C5470]">About</a>
+          <a href="/" className="block hover:text-[#5C5470]">Industries</a>
+          <a href="/" className="block hover:text-[#5C5470]">Solutions</a>
+          <a href="/" className="block hover:text-[#5C5470]">Customer Success</a>
+          <a href="/" className="block hover:text-[#5C5470]">Partners</a>
+          <a href="/" className="block hover:text-[#5C5470]">About</a>
           <button className="w-full border border-[#DBD8E3] text-[#DBD8E3] rounded-md px-4 py-2 hover:bg-[#DBD8E3] hover:text-[#2A2438] transition duration-300">
             Book a Demo
           </button>

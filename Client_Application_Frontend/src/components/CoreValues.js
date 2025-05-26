@@ -1,8 +1,8 @@
 
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { FaStar, FaHeart, FaSmile } from 'react-icons/fa'; // Import some icons from react-icons
+
 import image1 from '../assets/images/cv3.jpg';
 import image2 from '../assets/images/cv2.jpg';
 import image3 from '../assets/images/cv1.jpg';
