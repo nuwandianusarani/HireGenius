@@ -1,0 +1,39 @@
+/* Neon-themed background */
+.neon-bg {
+  background-image: url('../assets/neon-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Neon card styling */
+.neon-card {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  border: 2px solid #00ffcc;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.6), 0 0 30px rgba(0, 255, 204, 0.4);
+  padding: 20px;
+  color: white;
+}
+
+/* Neon text styling */
+.neon-text {
+  color: #00ffcc;
+  text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
+}
+
+/* Neon button styling */
+.neon-button {
+  background: #00ffcc;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
+  transition: all 0.3s ease;
+}
+
+.neon-button:hover {
+  background: #00ccaa;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 1);
+}

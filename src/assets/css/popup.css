@@ -1,0 +1,27 @@
+.neon-green-border {
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    background: none;
+    border-radius: 8px;
+    padding: 10px;
+    display: inline-block;
+    max-width: 60%;
+    box-shadow: 0 0 5px #00ff00, 
+                0 0 10px #00ff00, 
+                0 0 20px #00ff00;
+    text-shadow: 0 0 5px #00ff00, 
+                 0 0 10px #00ff00, 
+                 0 0 20px #00ff00;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  /* Optional: Glow effect on hover */
+  .neon-green-border:hover {
+    box-shadow: 0 0 10px #00ff00, 
+                0 0 20px #00ff00, 
+                0 0 40px #00ff00;
+    text-shadow: 0 0 10px #00ff00, 
+                 0 0 20px #00ff00, 
+                 0 0 40px #00ff00;
+  }
+  

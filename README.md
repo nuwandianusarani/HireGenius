@@ -1,24 +1,19 @@
-# HIREGENIUS
+# Rosa S.R.T.L - IT21311772
 
-HIREGENIUS is an innovative recruitment and talent acquisition platform designed to simplify hiring processes.
+## HR Interview
 
-- **Streamline candidate selection** through data-driven insights.
-- **Enhance recruitment efficiency** by automating repetitive tasks.
-- **Ensure top talent matches** organizational needs with precision.
+### Overview
+Design an innovative HR Interview System through Gamified Assessment
 
-By integrating cutting-edge tools, HIREGENIUS empowers businesses to make smarter, faster, and more confident hiring decisions.
+### Component Diagram
+![image](https://github.com/user-attachments/assets/55bae326-7901-4be6-93de-b2f17b6c01fe)
 
----
 
-## HireGenius Component Diagram
+### Main Objective
+Design & implement a system which can create gamified assessment based on candidate’s various factors which will depict as series of games along with clips and chats by replacing traditional interview process.
 
-![System Overview](system%20overview.png)
-
----
-
-## Group Members
-
-- **Nalinka G.K** - IT21467448  
-- **Hewamadduma N.A** - IT21310546  
-- **Mahawaththa N.T.M.A.S.M** - IT21308598  
-- **Rosa S.R.T.L** - IT21311772  
+### Sub Objectives
+- Create a model to prompt questions based on candidate’s various factors.
+- Create gamified environment with gamification elements.
+- Create games, clips & chats to display questions.
+- Create a scoring system to select the best fit candidate.

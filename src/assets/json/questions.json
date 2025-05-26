@@ -1,0 +1,329 @@
+{
+    "questions": [
+      {
+        "Qid": 1,
+        "difficulty": "low level",
+        "category": "General Background",
+        "question": "What is the best way to introduce yourself in an interview?",
+        "options": [
+          {
+            "text": "Give a brief background but emphasize hobbies to build a personal connection",
+            "score": 3
+          },
+          {
+            "text": "Highlight key professional experiences, relevant skills, and how they align with the role",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "Focus primarily on your job title and current responsibilities",
+            "score": 2
+          },
+          {
+            "text": "Start with education and certifications before discussing work experience",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "Qid": 2,
+        "difficulty": "low level",
+        "category": "General Background",
+        "question": "Why are you interested in this position?",
+        "options": [
+          {
+            "text": "The job is available, and I am actively looking for work",
+            "score": 1
+          },
+          {
+            "text": "I was attracted by the benefits and salary package",
+            "score": 2
+          },
+          {
+            "text": "I am passionate about the company’s mission, and my skills align with the role",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "The job aligns with my experience, and I see growth potential",
+            "score": 3
+          }
+        ]
+      },
+      {
+        "Qid": 3,
+        "difficulty": "low level",
+        "category": "General Background",
+        "question": "What is the best way to research a company before an interview?",
+        "options": [
+          {
+            "text": "Study the company’s website, mission, values, and recent projects",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "Look at job descriptions to understand the role expectations",
+            "score": 3
+          },
+          {
+            "text": "Ask colleagues and friends if they know anything about the company",
+            "score": 1
+          },
+          {
+            "text": "Read company reviews to get employee perspectives",
+            "score": 2
+          }
+        ]
+      },
+      {
+        "Qid": 4,
+        "difficulty": "low-mid level",
+        "category": "Skills and Experience",
+        "question": "What is the best way to describe your key strengths in an interview?",
+        "options": [
+          {
+            "text": "Connect them to job requirements with real-life examples",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "List your technical and soft skills, highlighting as many as possible",
+            "score": 3
+          },
+          {
+            "text": "Mention multiple strengths but avoid specific examples",
+            "score": 1
+          },
+          {
+            "text": "Focus on general personality traits like being hardworking and adaptable",
+            "score": 2
+          }
+        ]
+      },
+      {
+        "Qid": 5,
+        "difficulty": "low-mid level",
+        "category": "Skills and Experience",
+        "question": "How do you prioritize tasks when working on multiple projects?",
+        "options": [
+          {
+            "text": "Assess urgency and importance, then focus on high-priority tasks",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "Work on smaller, easier tasks first to build momentum",
+            "score": 2
+          },
+          {
+            "text": "Follow manager instructions for every step of the process",
+            "score": 1
+          },
+          {
+            "text": "Organize all tasks equally and complete them in a balanced way",
+            "score": 3
+          }
+        ]
+      },
+      {
+        "Qid": 6,
+        "difficulty": "mid level",
+        "category": "Teamwork and Collaboration",
+        "question": "You are working in a team, and a conflict arises between you and a colleague. What is the best way to handle it?",
+        "options": [
+          {
+            "text": "Ignore the issue and focus on completing your tasks",
+            "score": 1
+          },
+          {
+            "text": "Address the issue professionally, find common ground, and resolve the conflict",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "Seek advice from a manager before making a decision",
+            "score": 3
+          },
+          {
+            "text": "Work independently to avoid further conflict",
+            "score": 2
+          }
+        ]
+      },
+      {
+        "Qid": 7,
+        "difficulty": "mid level",
+        "category": "Teamwork and Collaboration",
+        "question": "What is the most important factor in effective teamwork?",
+        "options": [
+          {
+            "text": "Strong communication, collaboration, and shared goals",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "Ensuring each team member works independently but efficiently",
+            "score": 3
+          },
+          {
+            "text": "Following the leader’s decisions without questioning",
+            "score": 2
+          },
+          {
+            "text": "Completing individual tasks without involving others",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "Qid": 8,
+        "difficulty": "mid level",
+        "category": "Problem-Solving and Critical Thinking",
+        "question": "How do you handle stressful situations or tight deadlines?",
+        "options": [
+          {
+            "text": "Work late hours to complete everything without considering task efficiency",
+            "score": 1
+          },
+          {
+            "text": "Stay organized, break down tasks, and focus on priorities",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "Manage time efficiently but expect some delays due to stress",
+            "score": 3
+          },
+          {
+            "text": "Focus on getting things done, even if quality is affected",
+            "score": 2
+          }
+        ]
+      },
+      {
+        "Qid": 9,
+        "difficulty": "mid-high level",
+        "category": "Work Style and Personality",
+        "question": "As a leader, how should you approach decision-making and conflict resolution?",
+        "options": [
+          {
+            "text": "Consider all options but rely on personal experience to decide",
+            "score": 3
+          },
+          {
+            "text": "Gather team input, analyze options, and make informed decisions",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "Avoid direct involvement in conflicts and delegate resolution to HR",
+            "score": 1
+          },
+          {
+            "text": "Focus on maintaining team harmony rather than making tough decisions",
+            "score": 2
+          }
+        ]
+      },
+      {
+        "Qid": 10,
+        "difficulty": "mid-high level",
+        "category": "Work Style and Personality",
+        "question": "What is the most important trait of a successful leader?",
+        "options": [
+          {
+            "text": "Ability to delegate effectively and empower team members",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "Having extensive technical expertise in every aspect of the job",
+            "score": 3
+          },
+          {
+            "text": "Making quick decisions with minimal consultation",
+            "score": 2
+          },
+          {
+            "text": "Enforcing strict discipline and structure to maintain order",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "Qid": 11,
+        "difficulty": "high level",
+        "category": "Behavioral Questions",
+        "question": "You were leading a project, and the deadline was moved up unexpectedly. What is the best way to handle this situation?",
+        "options": [
+          {
+            "text": "Adjust the scope and remove some features without consulting stakeholders",
+            "score": 2
+          },
+          {
+            "text": "Reassess priorities, delegate efficiently, and align expectations with stakeholders",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "Work overtime while expecting the team to maintain the original pace",
+            "score": 3
+          },
+          {
+            "text": "Inform management that the new deadline is unfeasible and refuse changes",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "Qid": 12,
+        "difficulty": "high level",
+        "category": "Behavioral Questions",
+        "question": "Tell me about a time you failed at something and how you handled it. What is the best approach to answering this?",
+        "options": [
+          {
+            "text": "Describe the mistake but avoid discussing the learning process",
+            "score": 3
+          },
+          {
+            "text": "Justify the failure by blaming external factors",
+            "score": 2
+          },
+          {
+            "text": "Explain the situation, acknowledge the failure, share lessons learned, and highlight improvements",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "Claim you have never failed at anything significant",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "Qid": 13,
+        "difficulty": "high level",
+        "category": "Behavioral Questions",
+        "question": "Can you describe a time when you successfully implemented a process improvement at work?",
+        "options": [
+          {
+            "text": "Yes, explain the process, challenges, and positive outcomes",
+            "score": 4,
+            "correct": true
+          },
+          {
+            "text": "I suggested a change, but it was not implemented",
+            "score": 3
+          },
+          {
+            "text": "I don’t believe in altering established workflows",
+            "score": 1
+          },
+          {
+            "text": "I noticed inefficiencies but did not take action",
+            "score": 2
+          }
+        ]
+      }
+    ]
+  }

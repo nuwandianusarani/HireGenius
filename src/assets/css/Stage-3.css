@@ -1,0 +1,180 @@
+/* FloatingChainGame.css */
+
+/* Countdown animation */
+.countdown {
+  animation: zoomInOut 1s infinite;
+}
+
+@keyframes zoomInOut {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Submit button styling */
+.submit-button {
+  background: #00ffcc;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
+  transition: all 0.3s ease;
+  animation: pulse 1.5s infinite;
+}
+
+.submit-button:hover {
+  background: #00ccaa;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 1);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.neon-bg {
+  background-image: url('../../assets/neon-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.floating-chain-game {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .floating-tasks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .task {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: grab;
+    user-select: none;
+  }
+  
+  .task:active {
+    cursor: grabbing;
+  }
+  
+  .chain {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .chain-link {
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    min-width: 150px;
+    text-align: center;
+  }
+  
+  .empty-slot {
+    color: #999;
+  }
+  
+  .task-in-chain {
+    background-color: #e0f7fa;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .results {
+    margin-top: 20px;
+  }
+  
+  .score.success {
+    color: green;
+  }
+  
+  .score.error {
+    color: red;
+  }
+  
+  .correct-order {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .correct-order li {
+    margin: 5px 0;
+  }
+
+  /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .task {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: grab;
+    user-select: none;
+    margin-bottom: 10px;
+  }
+  
+  .task:active {
+    cursor: grabbing;
+  }
+  
+  .chain-link {
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    min-width: 150px;
+    text-align: center;
+  }
+  
+  .empty-slot {
+    color: #999;
+  }
+  
+  .task-in-chain {
+    background-color: #e0f7fa;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  /* Slot number styling */
+.slot-number {
+  padding: 5px 10px;
+  border: 2px dotted #00ffcc;
+  border-radius: 5px;
+  color: #00ffcc;
+  font-size: 14px;
+  font-weight: bold;
+  min-width: 50px;
+  text-align: center;
+  margin-left: 10px;
+}
+
+/* Other styles from your original CSS... */
