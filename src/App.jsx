@@ -10,9 +10,9 @@ import Login from "./auth/Login";
 import DevOps from "./Pages/DevOps";
 import SkillsMap from "./Pages/SkillsMap";
 import GameBoard from './Pages/GameBoard';
+import PMInstructions from "./Pages/PMInstructions";
 
 function App() {
-  
   return (
     <Router future={{ v7_startTransition: true }}>
       <Routes>
@@ -28,6 +28,7 @@ function App() {
         <Route path="/DevOps" element={<DevOps/>} />
         <Route path="/SkillsMap" element={<SkillsMap/>} />
         <Route path="/GameBoard" element={<GameBoard/>} />
+        <Route path="/PMInstructions" element={<PMInstructions/>} />
       </Routes>
     </Router>
   );

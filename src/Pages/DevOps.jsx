@@ -119,7 +119,7 @@ export default function DevOps() {
           toast.success('Challenge submitted successfully');
 
           setTimeout(() => {
-            navigate('/GameBoard');
+            navigate('/PMInstructions');
           }, 1000);
         } catch (error) {
           console.log('Error adding devOps data to the database : ', error.message);

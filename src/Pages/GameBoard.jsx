@@ -4,6 +4,11 @@ import PersonBox from './PersonBox';
 import TaskCard from './TaskCard';
 import '../assets/css/GameBoard2.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { getAuth } from "firebase/auth";
+import { db } from '../firebase/Firebase';
+import { collection, addDoc } from 'firebase/firestore';
+import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const roles = ['SE', 'DevOps', 'QA', 'BM'];
 
@@ -52,6 +57,15 @@ const GameBoard = () => {
   const [sickLeavePersonId, setSickLeavePersonId] = useState(null);
   const [currentTaskId, setCurrentTaskId] = useState(null);
   const taskTimerRef = useRef(null);
+  const [email, setEmail] = useState('');
+  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    setEmail(user.email);
+  }, []);
 
   // Filter unassigned & non-expired tasks
   const availableTasks = tasks.filter(t => t.assignedTo === null && !t.expired);
@@ -192,9 +206,33 @@ const GameBoard = () => {
 
     if (allAssignedOrExpired || allExpired) {
       setTimeout(() => setShowModal(true), 300);
-      localStorage.setItem('task-game-score', totalScore);
+      // localStorage.setItem('task-game-score', totalScore);
+      submitScoreToFirebase(totalScore);
     }
   }, [tasks, people]);
+
+  const submitScoreToFirebase = async (score) => {
+    try {
+      await addDoc(collection(db, "PM"), {
+        score: score,
+        time: Date.now(),
+        email: email,
+        createdAt: new Date()
+      });
+
+      toast.success('Score submitted to Firebase');
+
+      window.localStorage.clear();
+
+      setTimeout(() => {
+        const redirectUrl = `https://hire-genius-developer-stage.vercel.app/?email=${encodeURIComponent(email)}`;
+        window.location.href = redirectUrl;
+      }, 1000);
+    } catch (error) {
+      console.error('Error adding score to Firebase:', error.message);
+      toast.error('Failed to submit score');
+    }
+  };
 
   return (
     <div
